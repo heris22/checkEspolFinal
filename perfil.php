@@ -53,14 +53,7 @@
                        
                                     ?>
                 </div>  
-                              
-                  
-                 <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1">
-                        <button type="button" class="btn btn-default pull-right" onclick=" window.location.href='#' ">Cambiar Contraseña</button>
-                     </div>  
-                </div>   
-
+               
                 <div class="row">
                     <div class="col-lg-12" >
                          <div class="col-lg-10 col-lg-offset-1 ">
