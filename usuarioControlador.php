@@ -27,11 +27,11 @@ class UsuarioControlador extends DataBaseControlador
   }
     
   function crearUsuario($nombre,$username,$email,$contrasenia,$imagen) {    
-    $insertrow = self::$db->insertRow("INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?)", array(null, "{$nombre}", "{$username}", "{$email}", "{$contrasenia}", "{$imagen}"));
+    $insertrow = self::$db->insertRow("INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?)", array(null, "{$nombre}", "{$username}", "{$email}", md5("{$contrasenia}"), "{$imagen}"));
   }
   
   function crearUsuario1($nombre,$username,$email,$contrasenia) {    
-    $insertrow = self::$db->insertRow("INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?)", array(null, "{$nombre}", "{$username}", "{$email}", "{$contrasenia}", "subidas/usuario/fondoFacultades.png"));
+    $insertrow = self::$db->insertRow("INSERT INTO usuario VALUES (?, ?, ?, ?, ?, ?)", array(null, "{$nombre}", "{$username}", "{$email}", md5("{$contrasenia}"), "subidas/usuario/fondoFacultades.png"));
   }
 
   //function readusuario() {
@@ -45,7 +45,7 @@ class UsuarioControlador extends DataBaseControlador
   //} 
 
   function actualizarUsuario($idusuario,$nombre,$username,$email,$contrasenia,$imagen) {    
-    $insertrow = self::$db->updateRow("UPDATE usuario SET usuario.nombre = ? , username = ? , email = ? , password = ?, imagen = ? WHERE idusuario = ? ", array( "{$nombre}", "{$username}", "{$email}", "{$contrasenia}", "{$imagen}","{$idusuario}"));
+    $insertrow = self::$db->updateRow("UPDATE usuario SET usuario.nombre = ? , username = ? , email = ? , password = ?, imagen = ? WHERE idusuario = ? ", array( "{$nombre}", "{$username}", "{$email}", md5("{$contrasenia}"), "{$imagen}","{$idusuario}"));
   }  
 
   function eliminarUsuario($id) {    
@@ -61,7 +61,7 @@ class UsuarioControlador extends DataBaseControlador
                 //el usuario existe
                     
                     //compara con md5
-                    if($row["password"] == $pass){
+                    if($row["password"] == md5($pass)){
                     session_start();  
                     $_SESSION['usuario'] = $row["username"];
                     $_SESSION['idusuario'] =  $row["idusuario"]; 
@@ -83,7 +83,7 @@ class UsuarioControlador extends DataBaseControlador
                 //el usuario existe
                     
                     //compara con md5
-                    if($row["password"] == $pass){
+                    if($row["password"] == md5($pass)){
                     session_start();  
                     $_SESSION['usuario'] = $row["username"];
                     $_SESSION['idusuario'] =  $row["idusuario"]; 
